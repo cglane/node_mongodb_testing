@@ -31,7 +31,15 @@ const envVarsSchema = Joi.object({
   RB_USER: Joi.string().required()
     .description('RB user'),
   GDG_DEV: Joi.string().required()
-    .description('GDG Dev MongoDB')
+    .description('GDG Dev MongoDB'),
+  GDG_PROD: Joi.string().required()
+    .description('GDG Prod'),
+  GDG_ID: Joi.string().required()
+    .description('GDG Product Code Id'),
+  AWS_ACCESS_KEY: Joi.string().required()
+    .description('AWS Access Key'),
+  AWS_SECRET_KEY: Joi.string().required()
+    .description('AWS Secret Key')
 }).unknown()
   .required();
 
@@ -42,10 +50,14 @@ if (error) {
 
 const config = {
   env: envVars.NODE_ENV,
+  gdgId: envVars.GDG_ID,
   port: envVars.PORT,
+  awsAccessKey: envVars.AWS_ACCESS_KEY,
+  awsSecretKey: envVars.AWS_SECRET_KEY,
   mongooseDebug: envVars.MONGOOSE_DEBUG,
   jwtSecret: envVars.JWT_SECRET,
   gdg_dev: envVars.GDG_DEV,
+  gdg_prod: envVars.GDG_PROD,
   auth: {
     token: envVars.AUTH_TOKEN
   },

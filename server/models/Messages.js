@@ -86,8 +86,6 @@ MessageSchema.statics = {
     * @returns {Promise<Object>} - Status object of bulk insert and remove
   **/
   archiveMessages(clientId, days) {
-    console.log(clientId, 'clientId');
-    console.log(days, 'days');
     const d = new Date();
     d.setDate(d.getDate() - days);
     return this.find({
@@ -96,8 +94,7 @@ MessageSchema.statics = {
     })
     .exec()
     .then((messages) => {
-      console.log(messages, 'messges');
-      if (messages) {
+      if (messages.length > 0) {
         return this.removeAndArchive(messages)
           .then(() => ({ status: `Messages for clientId: ${clientId} Archived Successfully` }));
       }
